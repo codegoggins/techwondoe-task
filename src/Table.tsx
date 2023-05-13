@@ -8,6 +8,16 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from './components/Button';
 import AddNew from './components/AddNew';
 
+type UserData = {
+    id:number,
+    name: string;
+    email: string;
+    status: string;
+    role: string;
+    lastLogin: string;
+    lastLoginTime: string;
+}
+
 const Table:FC = () => {
 
 
@@ -19,7 +29,15 @@ const Table:FC = () => {
   {"id":4,"name":"Rodie Conlaund","email":"rconlaund3@about.me","status":"active","role":"admin","lastLogin":"7/7/2022","lastLoginTime":"2:12 PM"},
   {"id":5,"name":"Amity Gorman","email":"agorman4@ameblo.jp","status":"invited","role":"Sales Rep","lastLogin":"6/24/2022","lastLoginTime":"10:56 AM"},
   {"id":6,"name":"Osbourne Romanski","email":"oromanski5@e-recht24.de","status":"invited","role":"Sales leader","lastLogin":"7/6/2022","lastLoginTime":"9:42 AM"}
-  ]  
+  ]
+  
+  const [userData,setUserData] = useState<UserData[]>(data);
+
+//   ADD NEW USER
+const handleAddNewUser = (newUser:UserData) => {
+    console.log(newUser);
+    setUserData([...userData, newUser]);
+}
 
 
 // MODAL POPUP
@@ -75,7 +93,7 @@ const Table:FC = () => {
         </thead>
         <tbody>
             {
-                data.map((user)=>(
+                userData.map((user)=>(
                     <tr key={user.id}>
                         <td className='py-4 flex items-center gap-3'>
                             <img 
@@ -119,7 +137,7 @@ const Table:FC = () => {
     </div>
 
     {/*<--------------------------------------- TABLE -------------------------------------------> */}
-    <AddNew isOpen={isModalOpen} onClose={handleCloseModal}/>
+    <AddNew isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleAddNewUser} len={userData.length}/>
     
 
     </div>
