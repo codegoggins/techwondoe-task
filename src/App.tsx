@@ -1,10 +1,11 @@
-import React from 'react';
+import React , {FC} from 'react';
 import './App.css';
+import Table from './Table';
 
-function App() {
+const App:FC = () => {
   return (
     <div className="App">
-         <h1 className='text-6xl'>Hello</h1>
+         <Table/>
     </div>
   );
 }
