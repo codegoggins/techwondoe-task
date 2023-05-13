@@ -1,9 +1,19 @@
 import React, { useState,FC } from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 
-const AddNew:FC = () => {
+type ModalProps = {
+  isOpen?:boolean,
+  onClose?:()=>void
+}
+
+const AddNew:FC<ModalProps> = ({isOpen,onClose}) => {
+
+  if(!isOpen){
+    return null;
+  }
 
   return (
+    
     (
 
     <div className='fixed top-0 left-0 w-full h-full flex items-center justify-center'>
@@ -13,7 +23,7 @@ const AddNew:FC = () => {
 
         <div 
         className='absolute top-3 right-3 cursor-pointer'>
-        <CloseIcon/>
+        <CloseIcon onClick={onClose}/>
         </div>
 
         {/* <----------------- MODAL FORM --------------------> */}

@@ -1,4 +1,4 @@
-import React , {FC} from 'react'
+import React , {FC,useState} from 'react'
 
 // ICONS
 import DownloadIcon from '@mui/icons-material/Download';
@@ -6,6 +6,7 @@ import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from './components/Button';
+import AddNew from './components/AddNew';
 
 const Table:FC = () => {
 
@@ -22,6 +23,15 @@ const Table:FC = () => {
 
 
 // MODAL POPUP
+   const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+
+   const handleOpenModal = () => {
+     setIsModalOpen(true);
+   }
+
+   const handleCloseModal = () => {
+     setIsModalOpen(false);
+   }
 
   return (
     <div className='bg-white m-12 rounded-lg border border-gray-300 p-4'>
@@ -34,7 +44,7 @@ const Table:FC = () => {
 
     {/* <---------------------- ADD NEW USER BUTTON ---------------------> */}
 
-    <Button bgColor="blue" text="Add New"/>
+    <Button bgColor="blue" text="Add New" onClick={handleOpenModal}/>
 
     {/*<------------------------ DOWNLOAD BUTTON ------------------------->*/}
 
@@ -109,7 +119,7 @@ const Table:FC = () => {
     </div>
 
     {/*<--------------------------------------- TABLE -------------------------------------------> */}
-
+    <AddNew isOpen={isModalOpen} onClose={handleCloseModal}/>
     
 
     </div>
