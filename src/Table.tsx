@@ -1,12 +1,11 @@
-import React , {FC,useState} from 'react'
+import {FC,useState} from 'react'
 
 // ICONS
-import DownloadIcon from '@mui/icons-material/Download';
-import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
 import Button from './components/Button';
 import AddNew from './components/AddNew';
+import DeleteUser from './components/DeleteUser';
 
 type UserData = {
     id:number,
@@ -42,6 +41,8 @@ const handleAddNewUser = (newUser:UserData) => {
 
 // MODAL POPUP
    const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+   const [isDeleteModalOpen,setIsDeleteModalOpen] = useState<boolean>(false);
+
 
    const handleOpenModal = () => {
      setIsModalOpen(true);
@@ -49,6 +50,14 @@ const handleAddNewUser = (newUser:UserData) => {
 
    const handleCloseModal = () => {
      setIsModalOpen(false);
+   }
+
+   const handleOpenDeleteModal = () => {
+    setIsDeleteModalOpen(true);
+   }
+
+  const handleCloseDeleteModal = () => {
+    setIsDeleteModalOpen(false);
    }
 
   return (
@@ -124,7 +133,7 @@ const handleAddNewUser = (newUser:UserData) => {
                                 </span>
                                 <span 
                                 className='text-red-600 cursor-pointer'> 
-                                <DeleteIcon fontSize='large'/>
+                                <DeleteIcon fontSize='large' onClick={handleOpenDeleteModal}/>
                                 </span>
                             </div>
                         </td>
@@ -138,6 +147,7 @@ const handleAddNewUser = (newUser:UserData) => {
 
     {/*<--------------------------------------- TABLE -------------------------------------------> */}
     <AddNew isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleAddNewUser} len={userData.length}/>
+    <DeleteUser isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal}/>
     
 
     </div>
