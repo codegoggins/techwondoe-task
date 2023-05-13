@@ -20,6 +20,9 @@ const Table:FC = () => {
   {"id":6,"name":"Osbourne Romanski","email":"oromanski5@e-recht24.de","status":"invited","role":"Sales leader","lastLogin":"7/6/2022","lastLoginTime":"9:42 AM"}
   ]  
 
+
+// MODAL POPUP
+
   return (
     <div className='bg-white m-12 rounded-lg border border-gray-300 p-4'>
 
@@ -29,33 +32,34 @@ const Table:FC = () => {
 
     <div className='flex items-center gap-4 font-semibold'>
 
-    {/* ADD NEW USER BUTTON */}
+    {/* <---------------------- ADD NEW USER BUTTON ---------------------> */}
 
     <Button bgColor="blue" text="Add New"/>
 
-    {/* DOWNLOAD BUTTON */}
+    {/*<------------------------ DOWNLOAD BUTTON ------------------------->*/}
 
     <Button bgColor="green" text="Download CSV"/>
 
     </div>
     </div>
 
-    {/* TABLE */}
 
+
+    {/*<--------------------------------------- TABLE -------------------------------------------> */}
 
     <div className='mt-3 p-4'>
 
     <table className='w-full text-gray-900'>
         <thead>
             <tr className='font-semibold'>
-                <td className='py-4 border-b border-gray-700 cursor-pointer'>
+                <td className='py-4 border-b border-gray-700 cursor-pointer text-left'>
                 Name
                 </td>
-                <td className='py-4 border-b border-gray-700 cursor-pointer'>
+                <td className='py-4 border-b border-gray-700 cursor-pointer '>
                 Status
                 </td>
                 <td className='py-4 border-b border-gray-700'>Role</td>
-                <td className='py-4 border-b border-gray-700'>Last Login</td>
+                <td className='py-4 border-b border-gray-700 text-left'>Last Login</td>
                 <td className='py-4 border-b border-gray-700'></td>
             </tr>
         </thead>
@@ -101,7 +105,13 @@ const Table:FC = () => {
             }
         </tbody>
     </table>
+    
     </div>
+
+    {/*<--------------------------------------- TABLE -------------------------------------------> */}
+
+    
+
     </div>
   )
 }
