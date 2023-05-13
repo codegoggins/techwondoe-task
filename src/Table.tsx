@@ -5,6 +5,7 @@ import DownloadIcon from '@mui/icons-material/Download';
 import AddIcon from '@mui/icons-material/Add';
 import CreateIcon from '@mui/icons-material/Create';
 import DeleteIcon from '@mui/icons-material/Delete';
+import Button from './components/Button';
 
 const Table:FC = () => {
 
@@ -21,30 +22,20 @@ const Table:FC = () => {
 
   return (
     <div className='bg-white m-12 rounded-lg border border-gray-300 p-4'>
+
     <div className='flex items-center justify-between'>
+
     <h1 className='font-bold text-xl'>Users</h1>
+
     <div className='flex items-center gap-4 font-semibold'>
 
     {/* ADD NEW USER BUTTON */}
 
-        <button
-        className='bg-blue-500 py-[0.4rem] px-3 rounded-lg text-white flex items-center justify-center gap-2 cursor-pointer'>
-        <AddIcon/>
-        <span>
-        Add New
-        </span>
-        </button>
+    <Button bgColor="blue" text="Add New"/>
 
     {/* DOWNLOAD BUTTON */}
 
-        <button 
-        className='bg-green-500 py-[0.4rem] px-3 rounded-lg text-white flex items-center justify-center gap-2 cursor-pointer'
-        >
-        <DownloadIcon/>
-        <span>
-        Download CSV
-        </span>
-        </button>
+    <Button bgColor="green" text="Download CSV"/>
 
     </div>
     </div>
