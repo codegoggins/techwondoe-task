@@ -8,6 +8,7 @@ import Button from './components/Button';
 import AddNew from './components/AddNew';
 import DeleteUser from './components/DeleteUser';
 import UpdateUser from './components/UpdateUser';
+import Badge from './components/Badge';
 
 type UserData = {
     id:number,
@@ -231,9 +232,7 @@ const handleStatusSort = () => {
                             </div>
                         </td>
                         <td className='py-4'>
-                            <span>
-                                {user?.status}
-                            </span>
+                            <Badge text={user?.status}/>
                         </td>
                         <td className='py-4'>{user?.role}</td>
                         <td className='py-4'>
