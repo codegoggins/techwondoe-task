@@ -124,9 +124,24 @@ const handleSort = () => {
   };
   
 
-
+// SORT BY STATUS  
+const handleStatusSort = () => {
+    const start = currentPage * perPage;
+    const end = start + perPage;
   
-
+    const sortedData = data
+      .slice(start, end)
+      .sort((a, b) => {
+        if (a && b && a.status === 'active' && b.status === 'invited') {
+          return -1;
+        } else if (a && b && a.status === 'invited' && b.status === 'active') {
+          return 1;
+        } else {
+          return 0;
+        }
+      });
+    setFilteredData(sortedData);
+};  
 
 
 
