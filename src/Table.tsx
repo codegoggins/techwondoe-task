@@ -60,7 +60,14 @@ const handleDeleteUser = () => {
 
 // UPDATE USER
 const handleUpdateUser = (updatedUser:UserData) => {
-   
+    const updatedData = userData.map((user)=>{
+        if(user?.id === updatedUser?.id){
+          return updatedUser;
+        }else{
+          return user;
+        }
+     });
+     setUserData(updatedData);
 }
 
 

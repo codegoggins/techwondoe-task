@@ -37,6 +37,9 @@ const UpdateUser:FC<UpdateModalProps> = ({isOpen,onClose,user,onSubmit}) => {
     if (onSubmit) {
         onSubmit(updatedUser);
     }
+    if(onClose){
+        onClose();
+    }
   }
   
   const resetEdit = () => {
@@ -79,10 +82,9 @@ const UpdateUser:FC<UpdateModalProps> = ({isOpen,onClose,user,onSubmit}) => {
                     onChange={(e:ChangeEvent<HTMLInputElement>):void=>setRole(e.target.value)}
                     />
                     </div>
-                    <button type='submit' className='bg-blue-500 py-[0.6rem] px-4 rounded-lg text-white flex items-center justify-center gap-2'>Sumbit</button>
+                    <button type='submit' className='bg-blue-500 py-[0.6rem] px-4 rounded-lg text-white flex items-center justify-center gap-2'>Submit</button>
                 </form>
             </div>
-
         </div>
       )
   )
