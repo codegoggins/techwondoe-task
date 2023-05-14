@@ -6,6 +6,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 import Button from './components/Button';
 import AddNew from './components/AddNew';
 import DeleteUser from './components/DeleteUser';
+import UpdateUser from './components/UpdateUser';
 
 type UserData = {
     id:number,
@@ -15,7 +16,7 @@ type UserData = {
     role: string;
     lastLogin: string;
     lastLoginTime: string;
-}
+} | null;
 
 const Table:FC = () => {
 
@@ -42,14 +43,14 @@ const handleAddNewUser = (newUser:UserData) => {
 
 // DELETE USER
 
-const [deleteUser,setDeleteUser] = useState<UserData | null>(null);
+const [userInfo,setUserInfo] = useState<UserData>(null);
 
 const setUser = (user:UserData) => {
-    setDeleteUser(user);
+    setUserInfo(user);
 }
 
 const handleDeleteUser = () => {
-    const userIndex = userData?.findIndex(user => user?.id === deleteUser?.id);
+    const userIndex = userData?.findIndex(user => user?.id === userInfo?.id);
     if (userIndex !== -1) {
       const updatedData = [...userData];
       updatedData.splice(userIndex, 1);
@@ -57,17 +58,27 @@ const handleDeleteUser = () => {
     }
 }
 
+// UPDATE USER
+const handleUpdateUser = (updatedUser:UserData) => {
+   
+}
+
+
+
+
 
 // MODAL POPUP
-   const [isModalOpen,setIsModalOpen] = useState<boolean>(false);
+   const [isAddModalOpen,setIsModalOpen] = useState<boolean>(false);
    const [isDeleteModalOpen,setIsDeleteModalOpen] = useState<boolean>(false);
+   const [isUpdateModalOpen,setIsUpdateModalOpen] = useState<boolean>(false);
 
 
-   const handleOpenModal = () => {
+
+   const handleOpenAddModal = () => {
      setIsModalOpen(true);
    }
 
-   const handleCloseModal = () => {
+   const handleCloseAddModal = () => {
      setIsModalOpen(false);
    }
 
@@ -77,6 +88,13 @@ const handleDeleteUser = () => {
 
   const handleCloseDeleteModal = () => {
     setIsDeleteModalOpen(false);
+  }
+  const handleOpenUpdateModal = () => {
+    setIsUpdateModalOpen(true);
+   }
+
+  const handleCloseUpdateModal = () => {
+    setIsUpdateModalOpen(false);
   }
 
   return (
@@ -90,7 +108,7 @@ const handleDeleteUser = () => {
 
     {/* <---------------------- ADD NEW USER BUTTON ---------------------> */}
 
-    <Button bgColor="blue" text="Add New" onClick={handleOpenModal}/>
+    <Button bgColor="blue" text="Add New" onClick={handleOpenAddModal}/>
 
     {/*<------------------------ DOWNLOAD BUTTON ------------------------->*/}
 
@@ -122,14 +140,14 @@ const handleDeleteUser = () => {
         <tbody>
             {
                 userData.map((user)=>(
-                    <tr key={user.id}>
+                    <tr key={user?.id}>
                         <td className='py-4 flex items-center gap-3'>
                             <img 
                             className='w-[3rem] h-[3rem] object-cover rounded-full'
                             src="https://images.pexels.com/photos/15174712/pexels-photo-15174712.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1" alt="" />
                             <div className='flex flex-col items-start'>
                                 <span className='font-bold'>{user?.name}</span>
-                                <span>{user.email}</span>
+                                <span>{user?.email}</span>
                             </div>
                         </td>
                         <td className='py-4'>
@@ -148,7 +166,7 @@ const handleDeleteUser = () => {
                             <div className='flex items-center gap-2'>
                                 <span 
                                 className='text-yellow-400 cursor-pointer'>
-                                <CreateIcon fontSize='large'/>
+                                <CreateIcon fontSize='large' onClick={()=>{handleOpenUpdateModal();setUser(user)}}/>
                                 </span>
                                 <span 
                                 className='text-red-600 cursor-pointer'> 
@@ -165,8 +183,11 @@ const handleDeleteUser = () => {
     </div>
 
     {/*<--------------------------------------- TABLE -------------------------------------------> */}
-    <AddNew isOpen={isModalOpen} onClose={handleCloseModal} onSubmit={handleAddNewUser} len={userData.length}/>
+    <AddNew isOpen={isAddModalOpen} onClose={handleCloseAddModal} onSubmit={handleAddNewUser} len={userData.length}/>
     <DeleteUser isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal} onConfirm={handleDeleteUser}/>
+    {
+        userInfo && <UpdateUser isOpen={isUpdateModalOpen} onClose={handleCloseUpdateModal} user={userInfo} onSubmit={handleUpdateUser}/>
+    }
     
 
     </div>
@@ -174,3 +195,5 @@ const handleDeleteUser = () => {
 }
 
 export default Table
+
+
