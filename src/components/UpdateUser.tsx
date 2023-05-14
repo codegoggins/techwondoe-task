@@ -1,6 +1,5 @@
 import {FC,useState,ChangeEvent,FormEvent} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
-import { userInfo } from 'os';
 
 type UserData = {
     id:number;
