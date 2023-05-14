@@ -1,3 +1,23 @@
+# Techwondoe Task
+
+This is a User Data Representation in tabular format created using React JS, Typescript and Tailwind CSS.The Mock User API is created using Mockaroo.
+
+## Features
+
+- Add New User & Update Existing One
+- Delete User
+- Pagination 
+- Sort & Filter Data based on User Name and Status
+
+Project 
+
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/d64d3718-76e4-4c65-b102-4cfff1ccc3ba)
+
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/659d024f-c5fa-478c-a511-21902b9ce780)
+
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/3d5a9e8c-524c-4331-bc83-50bbf32312ae)
+
+
 # Getting Started with Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
