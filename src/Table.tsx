@@ -8,7 +8,6 @@ import Button from './components/Button';
 import AddNew from './components/AddNew';
 import DeleteUser from './components/DeleteUser';
 import UpdateUser from './components/UpdateUser';
-// import Pagination from './components/Pagination';
 
 type UserData = {
     id:number,
@@ -100,7 +99,34 @@ useEffect(() => {
   const start = currentPage * perPage;
   const end = start + perPage;
   setFilteredData(userData.slice(start, end));
-}, [data, currentPage, perPage]);
+}, [userData, currentPage, perPage]);
+
+
+// SORTING DATA
+const [sortOrder, setSortOrder] = useState('asc');
+
+// SORT BY NAME
+const handleSort = () => {
+    const sortProperty = 'name';
+    const newSortOrder = sortOrder === 'asc' ? 'desc' : 'asc';
+    const sortedData = filteredData.sort((a, b) => {
+        if (a && b) {
+            if (sortOrder === 'asc') {
+              return a.name.localeCompare(b.name);
+            } else {
+              return b.name.localeCompare(a.name);
+            }
+          }
+        return 0;
+    });
+    setFilteredData(sortedData);
+    setSortOrder(newSortOrder);
+  };
+  
+
+
+  
+
 
 
 
@@ -165,10 +191,10 @@ useEffect(() => {
     <table className='w-full text-gray-900'>
         <thead>
             <tr className='font-semibold'>
-                <td className='py-4 border-b border-gray-700 cursor-pointer text-left'>
+                <td className='py-4 border-b border-gray-700 cursor-pointer text-left' onClick={handleSort}>
                 Name
                 </td>
-                <td className='py-4 border-b border-gray-700 cursor-pointer '>
+                <td className='py-4 border-b border-gray-700 cursor-pointer' onClick={handleStatusSort}>
                 Status
                 </td>
                 <td className='py-4 border-b border-gray-700'>Role</td>
