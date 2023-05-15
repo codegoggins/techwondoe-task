@@ -43,11 +43,9 @@ const handleAddNewUser =async (newUser:UserData) => {
    try{
     const response = await axios.post('https://user-api-t37p.onrender.com/user', newUser);
     setUserData([...userData, newUser]);
-    console.log(response);
    }catch(error){
     console.error('Error adding user:', error);
    }
-    console.log(newUser);
 }
 
 

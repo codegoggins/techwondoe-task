@@ -22,9 +22,17 @@ const UpdateUser:FC<UpdateModalProps> = ({isOpen,onClose,user,onSubmit}) => {
 
   const [name,setName] = useState<string>("");
   const [role,setRole] = useState<string>("");  
+  const [error,setError] = useState(false);
 
   const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
     e.preventDefault();
+
+    // VALIDATE INPUT FIELDS
+    if (name.trim() === '' || role.trim() === '') {
+            setError(true);
+            return;
+    }
+
     if (!user) {
         return; // handle the undefined case
     }
@@ -69,8 +77,10 @@ const UpdateUser:FC<UpdateModalProps> = ({isOpen,onClose,user,onSubmit}) => {
                     placeholder={user?.name} 
                     className='border-[1px] outline-none p-[0.3rem] rounded-sm'
                     onChange={(e:ChangeEvent<HTMLInputElement>):void=>setName(e.target.value)}
-
                     />
+                    {
+                        error && <span className='text-red-500'>Name field cannot be empty !</span> 
+                    }
                     </div>
                     <div className='flex flex-col gap-2'>
                     <label>Role</label>
@@ -80,6 +90,9 @@ const UpdateUser:FC<UpdateModalProps> = ({isOpen,onClose,user,onSubmit}) => {
                     className='border-[1px] outline-none p-[0.3rem] rounded-sm'
                     onChange={(e:ChangeEvent<HTMLInputElement>):void=>setRole(e.target.value)}
                     />
+                    {
+                        error && <span className='text-red-500'>Role field cannot be empty !</span> 
+                    }
                     </div>
                     <button type='submit' className='bg-blue-500 py-[0.6rem] px-4 rounded-lg text-white flex items-center justify-center gap-2'>Submit</button>
                 </form>
