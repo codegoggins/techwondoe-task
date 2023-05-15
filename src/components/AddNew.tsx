@@ -23,6 +23,7 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
   const [role,setRole] = useState<string>("");
   const [email,setEmail] = useState<string>("");
   const [status,setStatus] = useState<string>("");
+  const [error,setError] = useState(false);
 
 
   const getCurrentTime = () => {
@@ -42,6 +43,11 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
   const handleSubmit = (e:FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
 
+    // VALIDATE INPUT FIELDS
+    if (name.trim() === '' || email.trim() === '' || role.trim() === '' || status.trim() === '') {
+      setError(true);
+      return;
+    }
 
     const newUser = {
       id:uuidv4(),
@@ -53,12 +59,12 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
       lastLoginTime: getCurrentTime()
     }
 
-    console.log(newUser) 
 
     if(onSubmit){
       onSubmit(newUser);
     }
-
+    
+    setError(false);
 
     //Close Modal on Submit  
      if(onClose){
@@ -103,6 +109,9 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
             className='border-[1px] outline-none p-[0.3rem] rounded-sm'
             onChange={(e:ChangeEvent<HTMLInputElement>):void=>setName(e.target.value)}
             />
+            {
+              error && <span className='text-red-500'>Name field cannot be empty !</span> 
+            }
             </div>
 
 
@@ -116,6 +125,9 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
             className='border-[1px] outline-none p-[0.3rem] rounded-sm'
             onChange={(e:ChangeEvent<HTMLInputElement>):void=>setRole(e.target.value)}
             />
+            {
+              error && <span className='text-red-500'>Role field cannot be empty !</span> 
+            }
             </div>
 
 
@@ -129,6 +141,9 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
             className='border-[1px] outline-none p-[0.3rem] rounded-sm'
             onChange={(e:ChangeEvent<HTMLInputElement>):void=>setEmail(e.target.value)}
             />
+            {
+              error && <span className='text-red-500'>Email field cannot be empty !</span> 
+            }
             </div>
 
 
@@ -146,7 +161,7 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
             value="active"
             onChange={(e:ChangeEvent<HTMLInputElement>):void=>setStatus(e.target.value)}
             />
-            
+
             <label htmlFor="active">active</label>
 
             {/* INVITED STATUS */}
@@ -161,6 +176,9 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
             <label htmlFor="invited">invited</label>
 
             </div>
+            {
+              error && <span className='text-red-500'>Choose status !</span> 
+            }
             </div>
 
             {/*<----------------------------------- SUBMIT BUTTON ---------------------------------->*/}
