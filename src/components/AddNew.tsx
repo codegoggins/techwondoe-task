@@ -1,23 +1,23 @@
 import { useState,FC,ChangeEvent,FormEvent} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 import Button from './Button';
+import { v4 as uuidv4 } from 'uuid';
 
 type ModalProps = {
   isOpen?:boolean,
   onClose?:()=>void,
   onSubmit?: (newUser: {
-    id:number,
+    id:string,
     name: string;
     email: string;
     status: string;
     role: string;
     lastLogin: string;
     lastLoginTime: string;
-  }) => void,
-  len:number
+  }) => void
 }
 
-const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit,len}) => {
+const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
 
   const [name,setName] = useState<string>("");
   const [role,setRole] = useState<string>("");
@@ -44,7 +44,7 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit,len}) => {
 
 
     const newUser = {
-      id:len+1,
+      id:uuidv4(),
       name: name,
       email: email,
       status: status,

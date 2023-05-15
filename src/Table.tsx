@@ -14,7 +14,7 @@ import DeleteIcon from '@mui/icons-material/Delete';
 
 
 type UserData = {
-    id:number,
+    id:string,
     name: string;
     email: string;
     status: string;
@@ -30,7 +30,7 @@ const Table:FC = () => {
   // FETCH ALL USERS
   useEffect(()=>{
     const fetchData = async () => {
-        const response = await axios.get('http://localhost:3008/user');
+        const response = await axios.get('https://user-api-t37p.onrender.com/user');
         setUserData(response.data);
     }
     fetchData(); 
@@ -41,7 +41,7 @@ const Table:FC = () => {
 //   ADD NEW USER
 const handleAddNewUser =async (newUser:UserData) => {
    try{
-    const response = await axios.post('http://localhost:3008/user', newUser);
+    const response = await axios.post('https://user-api-t37p.onrender.com/user', newUser);
     setUserData([...userData, newUser]);
     console.log(response);
    }catch(error){
@@ -62,7 +62,7 @@ const setUser = (user:UserData) => {
 
 const handleDeleteUser =async () => {
     try{
-      await axios.delete(`http://localhost:3008/user/${userInfo?.id}`);
+      await axios.delete(`https://user-api-t37p.onrender.com/user/${userInfo?.id}`);
       const updatedData = userData.filter((user) => user?.id !== userInfo?.id);
       setUserData(updatedData);
       setFilteredData(updatedData);
@@ -75,7 +75,7 @@ const handleDeleteUser =async () => {
 // UPDATE USER
 const handleUpdateUser =async (updatedUser:UserData) => {
     try{
-      const response = await axios.put(`http://localhost:3008/user/${updatedUser?.id}`, updatedUser);
+      const response = await axios.put(`https://user-api-t37p.onrender.com/user/${updatedUser?.id}`, updatedUser);
       const updatedData = userData.map((user)=>{
         if(user?.id === updatedUser?.id){
           return response.data;
@@ -279,7 +279,7 @@ const handleStatusSort = () => {
     </div>
 
     {/*<--------------------------------------- TABLE -------------------------------------------> */}
-    <AddNew isOpen={isAddModalOpen} onClose={handleCloseAddModal} onSubmit={handleAddNewUser} len={userData.length}/>
+    <AddNew isOpen={isAddModalOpen} onClose={handleCloseAddModal} onSubmit={handleAddNewUser}/>
     <DeleteUser isOpen={isDeleteModalOpen} onClose={handleCloseDeleteModal} onConfirm={handleDeleteUser}/>
     {
         userInfo && <UpdateUser isOpen={isUpdateModalOpen} onClose={handleCloseUpdateModal} user={userInfo} onSubmit={handleUpdateUser}/>

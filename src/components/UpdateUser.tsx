@@ -2,7 +2,7 @@ import {FC,useState,ChangeEvent,FormEvent} from 'react'
 import CloseIcon from '@mui/icons-material/Close';
 
 type UserData = {
-    id:number;
+    id:string;
     name: string;
     email: string;
     status: string;
