@@ -27,18 +27,27 @@ const Table:FC = () => {
 
   const [userData,setUserData] = useState<UserData[]>([]);
 
+  // FETCH ALL USERS
   useEffect(()=>{
     const fetchData = async () => {
-        const response = await axios.get('https://techwondummy.free.mockoapp.net/users');
+        const response = await axios.get('http://localhost:3008/user');
         setUserData(response.data);
     }
     fetchData(); 
-   },[])
+  },[]);
+
+  
 
 //   ADD NEW USER
-const handleAddNewUser = (newUser:UserData) => {
-    console.log(newUser);
+const handleAddNewUser =async (newUser:UserData) => {
+   try{
+    const response = await axios.post('http://localhost:3008/user', newUser);
     setUserData([...userData, newUser]);
+    console.log(response);
+   }catch(error){
+    console.error('Error adding user:', error);
+   }
+    console.log(newUser);
 }
 
 
@@ -51,26 +60,35 @@ const setUser = (user:UserData) => {
     setUserInfo(user);
 }
 
-const handleDeleteUser = () => {
-    const userIndex = userData?.findIndex(user => user?.id === userInfo?.id);
-    if (userIndex !== -1) {
-      const updatedData = [...userData];
-      updatedData.splice(userIndex, 1);
+const handleDeleteUser =async () => {
+    try{
+      await axios.delete(`http://localhost:3008/user/${userInfo?.id}`);
+      const updatedData = userData.filter((user) => user?.id !== userInfo?.id);
       setUserData(updatedData);
+      setFilteredData(updatedData);
+    }catch(err){
+      console.error('Error deleting user:', err);
     }
 }
 
+
 // UPDATE USER
-const handleUpdateUser = (updatedUser:UserData) => {
-    const updatedData = userData.map((user)=>{
+const handleUpdateUser =async (updatedUser:UserData) => {
+    try{
+      const response = await axios.put(`http://localhost:3008/user/${updatedUser?.id}`, updatedUser);
+      const updatedData = userData.map((user)=>{
         if(user?.id === updatedUser?.id){
-          return updatedUser;
+          return response.data;
         }else{
           return user;
         }
      });
      setUserData(updatedData);
+    }catch(err){
+      console.log(err);
+    }
 }
+
 
 // PAGINATON
 const [filteredData, setFilteredData] = useState<UserData[]>([]);

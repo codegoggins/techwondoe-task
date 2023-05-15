@@ -39,7 +39,7 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit,len}) => {
 
 
   // <---------------------- SUBMIT FORM -------------------------->
-  const handleSubmit = (e:FormEvent<HTMLFormElement>) => {
+  const handleSubmit = (e:FormEvent<HTMLFormElement>):void => {
     e.preventDefault();
 
 
