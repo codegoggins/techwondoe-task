@@ -201,16 +201,20 @@ const handleStatusSort = () => {
 
     {/*<--------------------------------------- TABLE -------------------------------------------> */}
 
-    <div className='mt-3 p-4'>
+    <div className='mt-3 p-4 overflow-x-auto'>
 
     <table className='w-full text-gray-900'>
         <thead>
             <tr className='font-semibold'>
-                <td className='py-4 border-b border-gray-700 cursor-pointer text-left' onClick={handleSort}>
+                <td className='py-4 border-b border-gray-700 cursor-pointer text-left'>
+                <span onClick={handleSort}>
                 Name
+                </span>  
                 </td>
                 <td className='py-4 border-b border-gray-700 cursor-pointer' onClick={handleStatusSort}>
+                <span onClick={handleStatusSort}>
                 Status
+                </span>  
                 </td>
                 <td className='py-4 border-b border-gray-700'>Role</td>
                 <td className='py-4 border-b border-gray-700 text-left'>Last Login</td>
