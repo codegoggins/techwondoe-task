@@ -8,14 +8,17 @@ This is a User Data Representation in tabular format created using React JS, Typ
 - Delete User
 - Pagination 
 - Sort & Filter Data based on User Name and Status
+- Download User Data in CSV Format
 
 Project 
 
-![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/d64d3718-76e4-4c65-b102-4cfff1ccc3ba)
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/1ef201bd-afdb-4a15-bf88-2b2beacf1063)
 
-![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/659d024f-c5fa-478c-a511-21902b9ce780)
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/34e94c22-a89c-42e6-badc-5ad142e7b8e7)
 
-![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/3d5a9e8c-524c-4331-bc83-50bbf32312ae)
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/6d70f9a0-12c1-442d-968b-756bf8b34481)
+
+![image](https://github.com/codegoggins/techwondoe-task/assets/97434903/4e70aa48-af22-4fda-89f3-ffba38c3bb23)
 
 
 # Getting Started with Create React App
