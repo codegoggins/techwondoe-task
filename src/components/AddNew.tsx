@@ -72,6 +72,14 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
      }
   }
 
+
+  const handleClose = ():void => {
+    if(onClose){
+      onClose();
+    }
+     setError(false);
+  }
+
   // <----- MODAL OPEN CONDITION ---->
 
   if(!isOpen){
@@ -89,7 +97,7 @@ const AddNew:FC<ModalProps> = ({isOpen,onClose,onSubmit}) => {
 
         <div 
         className='absolute top-3 right-3 cursor-pointer'>
-        <CloseIcon onClick={onClose}/>
+        <CloseIcon onClick={handleClose}/>
         </div>
 
         {/* <----------------- MODAL FORM --------------------> */}

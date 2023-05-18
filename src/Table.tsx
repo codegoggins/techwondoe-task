@@ -6,7 +6,7 @@ import DeleteUser from './components/DeleteUser';
 import UpdateUser from './components/UpdateUser';
 import Badge from './components/Badge';
 import axios from 'axios';
-// import { CSVLink } from "react-csv";
+import { CSVLink } from "react-csv";
 
 // ICONS
 import CreateIcon from '@mui/icons-material/Create';
@@ -26,12 +26,15 @@ type UserData = {
 const Table:FC = () => {
 
   const [userData,setUserData] = useState<UserData[]>([]);
+  const [loading, setLoading] = useState<Boolean>(true);
+
 
   // FETCH ALL USERS
   useEffect(()=>{
     const fetchData = async () => {
         const response = await axios.get('https://user-api-t37p.onrender.com/user');
         setUserData(response.data);
+        setLoading(false);
     }
     fetchData(); 
   },[]);
@@ -139,7 +142,25 @@ const handleStatusSort = () => {
         }
       });
     setFilteredData(sortedData);
-};  
+}; 
+
+ // FUNCTION TO CONVERT userData into a format that will be accepted by CSV
+ const convertToCSVData = (): any[] => {
+ const csvData: any[] = [];
+
+  // Add CSV headers
+  csvData.push(['ID', 'Name', 'Email', 'Status', 'Role', 'Last Login', 'Last Login Time']);
+
+  // Add user data rows
+  userData.forEach((user) => {
+    if (user) {
+      const { id, name, email, status, role, lastLogin, lastLoginTime } = user;
+      csvData.push([id, name, email, status, role, lastLogin, lastLoginTime]);
+    }
+  });
+
+  return csvData;
+};
 
 
 
@@ -188,9 +209,9 @@ const handleStatusSort = () => {
 
     <Button bgColor="blue" text="Add New" onClick={handleOpenAddModal}/>
 
-    {/* <CSVLink data={userData}>
-    <Button text="Download CSV" onClick={handleOpenAddModal}/>
-    </CSVLink> */}
+    <CSVLink data={convertToCSVData()}>
+       <Button text="Download CSV"/>
+    </CSVLink>
     
     </div>
     </div>
@@ -220,39 +241,46 @@ const handleStatusSort = () => {
             </tr>
         </thead>
         <tbody>
-            {
-                filteredData.map((user)=>(
-                    <tr key={user?.id}>
-                        <td className='py-4'>
-                            <div className='flex flex-col items-start'>
-                                <span className='font-bold'>{user?.name}</span>
-                                <span>{user?.email}</span>
-                            </div>
-                        </td>
-                        <td className='py-4'>
-                            <Badge text={user?.status}/>
-                        </td>
-                        <td className='py-4'>{user?.role}</td>
-                        <td className='py-4'>
-                            <div className='flex flex-col items-start'>
-                                <span className='font-bold'>{user?.lastLogin}</span>
-                                <span>{user?.lastLoginTime}</span>
-                            </div>
-                        </td>
-                        <td className='py-4'>
-                            <div className='flex items-center gap-2'>
-                                <span 
-                                className='text-yellow-400 cursor-pointer'>
-                                <CreateIcon fontSize='large' onClick={()=>{handleOpenUpdateModal();setUser(user)}}/>
-                                </span>
-                                <span 
-                                className='text-red-600 cursor-pointer'> 
-                                <DeleteIcon fontSize='large' onClick={()=>{handleOpenDeleteModal();setUser(user)}}/>
-                                </span>
-                            </div>
-                        </td>
+            {   loading ? (
+                    <tr className='h-20'>
+                      <td colSpan={5} className="font-bold text-center">
+                      Loading....
+                      </td>
                     </tr>
-                ))
+            ) :(
+                filteredData.map((user)=>(
+                  <tr key={user?.id}>
+                      <td className='py-4'>
+                          <div className='flex flex-col items-start'>
+                              <span className='font-bold'>{user?.name}</span>
+                              <span>{user?.email}</span>
+                          </div>
+                      </td>
+                      <td className='py-4'>
+                          <Badge text={user?.status}/>
+                      </td>
+                      <td className='py-4'>{user?.role}</td>
+                      <td className='py-4'>
+                          <div className='flex flex-col items-start'>
+                              <span className='font-bold'>{user?.lastLogin}</span>
+                              <span>{user?.lastLoginTime}</span>
+                          </div>
+                      </td>
+                      <td className='py-4'>
+                          <div className='flex items-center gap-2'>
+                              <span 
+                              className='text-yellow-400 cursor-pointer'>
+                              <CreateIcon fontSize='large' onClick={()=>{handleOpenUpdateModal();setUser(user)}}/>
+                              </span>
+                              <span 
+                              className='text-red-600 cursor-pointer'> 
+                              <DeleteIcon fontSize='large' onClick={()=>{handleOpenDeleteModal();setUser(user)}}/>
+                              </span>
+                          </div>
+                      </td>
+                  </tr>
+              ))
+            )
             }
         </tbody>
     </table>

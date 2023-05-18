@@ -50,6 +50,7 @@ const UpdateUser:FC<UpdateModalProps> = ({isOpen,onClose,user,onSubmit}) => {
   }
   
   const resetEdit = () => {
+    setError(false);
      if(onClose){
         onClose();
      }
